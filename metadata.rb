@@ -1,0 +1,7 @@
+name             'mailcatcher'
+maintainer       'SPINEN'
+maintainer_email 'keli.grubb@spinen.com'
+license          'All rights reserved'
+description      'Installs/Configures mailcatcher'
+long_description 'Installs/Configures mailcatcher'
+version          '0.1.0'
