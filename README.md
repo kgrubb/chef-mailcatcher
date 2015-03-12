@@ -1,6 +1,5 @@
-Spinen Mailcatcher Cookbook
+Chef Mailcatcher Cookbook
 ===
----
 
 This cookbook is an amalgamation of the mailcatcher cookbooks made by andruby and bryantebeek.
 It installs a single configurable instance of mailcatcher and installs/configures postfix.
@@ -69,26 +68,26 @@ This cookbook contains the following attributes:
 Usage
 ---
 
-### spinen-mailcatcher::default
+### mailcatcher::default
 
-Include `spinen-mailcatcher` in your node's `run_list`:
+Include `mailcatcher` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[spinen-mailcatcher::default]"
+    "recipe[mailcatcher::default]"
   ]
 }
 ```
 
 Supported Platforms
 ---
-
+Tested Platforms:
 * Ubuntu 12.04
+* Ubuntu 14.04
+* Centos 7.0
 
-Currently, this cookbook is restricted to platforms using upstart. If someone makes an init
-script for another service manager, I'd be glad to add it to the cookbook. Please submit a pr 
-and help make this cookbook more versatile!
+Let me know if any other platforms are compatible and I'll add them to the list.
 
 License and Authors
 ---
