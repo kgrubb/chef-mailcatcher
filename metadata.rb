@@ -1,4 +1,4 @@
-name             'mailcatcher'
+name             'chef-mailcatcher'
 maintainer       'SPINEN'
 maintainer_email 'keli.grubb@spinen.com'
 license          'Apache License'
