@@ -1,10 +1,14 @@
 Chef Mailcatcher Cookbook
 ===
 
+Description
+---
+
 This cookbook is an amalgamation of the mailcatcher cookbooks made by andruby and bryantebeek.
 It installs a single configurable instance of mailcatcher and installs/configures postfix.
 
-## Attributes
+Attributes
+---
 
 This cookbook contains the following attributes:
 
@@ -82,9 +86,13 @@ Include `mailcatcher` in your node's `run_list`:
 
 Supported Platforms
 ---
+
 Tested Platforms:
+
 * Ubuntu 12.04
+
 * Ubuntu 14.04
+
 * Centos 7.0
 
 Let me know if any other platforms are compatible and I'll add them to the list.
