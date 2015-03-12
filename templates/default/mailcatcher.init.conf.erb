@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# mailcatcher        Startup script for the Mailcatcher SMTP srever
+#
+# chkconfig: - 20 80
+# description: The Mailcatcher server receives SMTP emails and provides \
+#              the ability to view them in a web browser instead of relaying.
+# processname: mailcatcher
+# pidfile: /var/run/mailcatcher.pid
+#
+### BEGIN INIT INFO
+# Provides: mailcatcher
+# Required-Start: $local_fs $remote_fs $network $named
+# Required-Stop: $local_fs $remote_fs $network
+# Short-Description: start and stop Mailcatcher SMTP server
+# Description: The Mailcatcher server receives SMTP emails and provides
+#  the ability to view them in a web browser instead of relaying.
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+mailcatcher="/usr/local/bin/mailcatcher"
+NAME=mailcatcher
+pidfile=/var/run/mailcatcher.pid
+OPTIONS="--http-ip <%= node['mailcatcher']['http_ip'] %> --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip <%= node['mailcatcher']['smtp_ip'] %> --smtp-port <%= node['mailcatcher']['smtp_port'] %> --foreground"
+RETVAL=0
+STOP_TIMEOUT=10
+
+start() {
+    echo -n $"Starting $NAME: "
+    if [ -s ${pidfile} ]; then
+        RETVAL=1
+        echo -n "Already running!" && warning
+        echo
+    else
+        nohup ${mailcatcher} ${OPTIONS} >/dev/null 2>&1 &
+        REVAL=$?
+        PID=$!
+        [ $RETVAL = 0 ] && success || failure
+        echo
+        echo $PID > ${pidfile}
+    fi
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $NAME: "
+    killproc -p ${pidfile} -d $STOP_TIMEOUT $mailcatcher
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f ${pidfile}
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+          status -p ${pidfile} $mailcatcher
+          RETVAL=$?
+          ;;
+    restart)
+          stop
+          start
+          ;;
+    *)
+        echo $"Usage: $0 $NAME {start|stop|restart|status}"
+        RETVAL=2
+esac
+
+exit $RETVAL

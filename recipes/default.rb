@@ -7,38 +7,59 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# temporary: just updating
-execute 'update' do
-  command 'sudo apt-get update'
-end
-
 # Install required dependencies
-%w(
-  build-essential
-  software-properties-common
-  sqlite
-  libsqlite3-dev
-  make
-  ruby1.9.1-dev
-  g++
-).each do |deb|
-  package deb
+case node['platform_family']
+when 'debian'
+  %w(
+    build-essential
+    software-properties-common
+    sqlite
+    libsqlite3-dev
+    make
+    ruby1.9.1-dev
+    g++
+  ).each do |deb|
+    package deb
+  end
+when 'rhel', 'fedora', 'suse'
+  # Install required dependencies
+  %w(
+    gcc
+    gcc-c++
+    sqlite-devel
+    ruby-devel
+  ).each do |yum|
+    package yum
+  end
 end
 
 # Install mailcatcher
 gem_package 'mailcatcher'
 
 # Create init scripts for Mailcatcher daemon.
-template '/etc/init/mailcatcher.conf' do
-  source 'mailcatcher.upstart.conf.erb'
-  mode 0644
-  notifies :restart, 'service[mailcatcher]', :immediately
-end
-
-service 'mailcatcher' do
-  provider Chef::Provider::Service::Upstart
-  supports restart: true
-  action :start
+case node['platform_family']
+when 'debian'
+  template '/etc/init/mailcatcher.conf' do
+    source 'mailcatcher.upstart.conf.erb'
+    mode 0644
+    notifies :restart, 'service[mailcatcher]', :immediately
+  end
+  service 'mailcatcher' do
+    provider Chef::Provider::Service::Upstart
+    supports restart: true
+    action :start
+  end
+when 'rhel', 'fedora', 'suse'
+  template '/etc/init.d/mailcatcher' do
+    source 'mailcatcher.init.conf.erb'
+    mode 0744
+    notifies :restart, 'service[mailcatcher]', :immediately
+  end
+  service 'mailcatcher' do
+    provider Chef::Provider::Service::Init
+    supports restart: true
+    action :start
+  end
 end
 
 # Install, configure, and restart postfix
