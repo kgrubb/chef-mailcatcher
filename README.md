@@ -90,12 +90,14 @@ Supported Platforms
 Tested Platforms:
 
 * Ubuntu 12.04
-
 * Ubuntu 14.04
-
+* Debian 7.8
 * Centos 7.0
 
 Let me know if any other platforms are compatible and I'll add them to the list.
+
+WARNING: For now, there are no systemd scripts, so any distro using systemd will
+probably run into issues (ex. Fedora 21).
 
 License and Authors
 ---
