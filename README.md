@@ -26,25 +26,25 @@ This cookbook contains the following attributes:
     <td><tt>mailcatcher</tt></td>
   </tr>
   <tr>
-    <td><tt>['mailcatcher']['smtp-ip']</tt></td>
+    <td><tt>['mailcatcher']['smtp_ip']</tt></td>
     <td>String</td>
     <td>The ip address of the smtp server</td>
     <td><tt>127.0.0.1</tt></td>
   </tr>
   <tr>
-    <td><tt>['mailcatcher']['smtp-port']</tt></td>
+    <td><tt>['mailcatcher']['smtp_port']</tt></td>
     <td>Integer</td>
     <td>The port of the smtp server</td>
     <td><tt>1025</tt></td>
   </tr>
   <tr>
-    <td><tt>['mailcatcher']['http-ip']</tt></td>
+    <td><tt>['mailcatcher']['http_ip']</tt></td>
     <td>String</td>
     <td>The ip address of the http server</td>
     <td><tt>0.0.0.0</tt></td>
   </tr>
   <tr>
-    <td><tt>['mailcatcher']['http-port']</tt></td>
+    <td><tt>['mailcatcher']['http_port']</tt></td>
     <td>Integer</td>
     <td>The port of the http server</td>
     <td><tt>1080</tt></td>
