@@ -37,7 +37,7 @@ end
 gem_package 'mailcatcher'
 
 # Create init scripts for Mailcatcher daemon.
-case node['platform_family']
+case node['platform']
 # upstart script for ubuntu machines
 when 'ubuntu'
   template '/etc/init/mailcatcher.conf' do
