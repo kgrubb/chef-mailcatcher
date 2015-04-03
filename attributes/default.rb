@@ -4,8 +4,6 @@
 #
 # Copyright (C) 2015 SPINEN
 #
-# All rights reserved - Do Not Redistribute
-#
 
 default['mailcatcher']['http_ip'] = '0.0.0.0'
 default['mailcatcher']['http_port'] = 1080
