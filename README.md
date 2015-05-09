@@ -20,10 +20,16 @@ This cookbook contains the following attributes:
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['mailcatcher']['bin']</tt></td>
+    <td><tt>['mailcatcher']['mailcatcher']['name']</tt></td>
+    <td>String</td>
+    <td>The name of the MailCatcher binary file</td>
+    <td><tt>mailcatcher</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['mailcatcher']['mailcatcher']['bin']</tt></td>
     <td>String</td>
     <td>The location of the MailCatcher binary file</td>
-    <td><tt>mailcatcher</tt></td>
+    <td><tt>/usr/bin/mailcatcher</tt></td>
   </tr>
   <tr>
     <td><tt>['mailcatcher']['smtp_ip']</tt></td>

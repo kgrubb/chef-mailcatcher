@@ -3,7 +3,7 @@ Description=Mailcatcher webmail
 After=local-fs.target remote-fs.target network.target named.service
 
 [Service]
-ExecStart=/usr/local/bin/<%= node['mailcatcher']['bin'] %> --http-ip="<%= node['mailcatcher']['http_ip'] %>" --http-port=<%= node['mailcatcher']['http_port'] %> --smtp-ip="<%= node['mailcatcher']['smtp_ip'] %>" --smtp-port=<%= node['mailcatcher']['smtp_port'] %> --foreground
+ExecStart=<%= node['mailcatcher']['bin'] %> --http-ip="<%= node['mailcatcher']['http_ip'] %>" --http-port=<%= node['mailcatcher']['http_port'] %> --smtp-ip="<%= node['mailcatcher']['smtp_ip'] %>" --smtp-port=<%= node['mailcatcher']['smtp_port'] %> --foreground
 Type=forking
 
 [Install]

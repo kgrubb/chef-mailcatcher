@@ -11,8 +11,8 @@
 ### END INIT INFO
 
 DESC="Super simple SMTP server"
-NAME=mailcatcher
-DAEMON=/usr/bin/$NAME
+NAME=<%= node['mailcatcher']['name'] %>
+DAEMON=<%= node['mailcatcher']['bin'] %>
 DAEMON_ARGS="--http-ip <%= node['mailcatcher']['http_ip'] %> --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip <%= node['mailcatcher']['smtp_ip'] %> --smtp-port <%= node['mailcatcher']['smtp_port'] %>"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
@@ -49,8 +49,8 @@ do_stop()
     PID=`/bin/ps -fu $USER| grep $NAME | grep -v "grep" | awk '{print $2}'`
     if [ -f "$PIDFILE" ]
     then
-        rm -f $PIDFILE
         kill $PID
+        rm -f $PIDFILE
         return 0
     else
         return 1
