@@ -4,8 +4,6 @@
 #
 # Copyright (C) 2015 SPINEN
 #
-# All rights reserved - Do Not Redistribute
-#
 
 # Install required dependencies
 case node['platform_family']
