@@ -6,7 +6,7 @@ stop on runlevel [!2345]
 
 respawn
 
-exec <%= node['mailcatcher']['bin'] %> \
+exec <%= node['mailcatcher']['name'] %> \
     --http-ip="<%= node['mailcatcher']['http_ip'] %>" \
     --http-port=<%= node['mailcatcher']['http_port'] %> \
     --smtp-ip="<%= node['mailcatcher']['smtp_ip'] %>" \

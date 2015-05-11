@@ -53,11 +53,11 @@ when 'debian'
   template '/etc/init.d/mailcatcher' do
     source 'mailcatcher.init.debian.conf.erb'
     mode 0744
-    notifies :restart, 'service[mailcatcher]', :immediately
+    notifies :start, 'service[mailcatcher]', :immediately
   end
   service 'mailcatcher' do
     provider Chef::Provider::Service::Init
-    supports restart: true
+    supports start: true, stop: true, status: true
     action :start
   end
 # sysv script for centos and suse (needs to be tested on suse still)
@@ -69,7 +69,7 @@ when 'suse', 'centos'
   end
   service 'mailcatcher' do
     provider Chef::Provider::Service::Init
-    supports restart: true
+    supports start: true, stop: true, status: true
     action :start
   end
 # Systemd init scripts. Still broken.

@@ -1,75 +1,100 @@
-#!/bin/bash
-#
-# mailcatcher        Startup script for the Mailcatcher SMTP srever
-#
-# chkconfig: - 20 80
-# description: The Mailcatcher server receives SMTP emails and provides \
-#              the ability to view them in a web browser instead of relaying.
-# processname: mailcatcher
-# pidfile: /var/run/mailcatcher.pid
-#
+#! /bin/sh
 ### BEGIN INIT INFO
-# Provides: mailcatcher
-# Required-Start: $local_fs $remote_fs $network $named
-# Required-Stop: $local_fs $remote_fs $network
-# Short-Description: start and stop Mailcatcher SMTP server
-# Description: The Mailcatcher server receives SMTP emails and provides
-#  the ability to view them in a web browser instead of relaying.
+# Provides:          mailcatcher
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Example initscript
+# Description:       This file should be used to construct scripts to be
+#                    placed in /etc/init.d.
 ### END INIT INFO
 
-# Source function library.
+DESC="Super simple SMTP server"
+NAME=<%= node['mailcatcher']['name'] %>
+DAEMON=<%= node['mailcatcher']['bin'] %>
+DAEMON_ARGS="--http-ip <%= node['mailcatcher']['http_ip'] %> --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip <%= node['mailcatcher']['smtp_ip'] %> --smtp-port <%= node['mailcatcher']['smtp_port'] %>"
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
 . /lib/lsb/init-functions
 
-mailcatcher="/usr/local/bin/mailcatcher"
-NAME=mailcatcher
-pidfile=/var/run/mailcatcher.pid
-OPTIONS="--http-ip <%= node['mailcatcher']['http_ip'] %> --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip <%= node['mailcatcher']['smtp_ip'] %> --smtp-port <%= node['mailcatcher']['smtp_port'] %> --foreground"
-RETVAL=0
-STOP_TIMEOUT=10
-
-start() {
-    echo -n $"Starting $NAME: "
-    if [ -s ${pidfile} ]; then
-        RETVAL=1
-        echo -n "Already running!" && warning
-        echo
-    else
-        nohup ${mailcatcher} ${OPTIONS} >/dev/null 2>&1 &
-        REVAL=$?
-        PID=$!
-        [ $RETVAL = 0 ] && success || failure
-        echo
-        echo $PID > ${pidfile}
-    fi
-    return $RETVAL
+#
+# Function that starts the daemon/service
+#
+do_start()
+{
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --exec $DAEMON --test > /dev/null \
+        || return 1
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --exec $DAEMON -- \
+        $DAEMON_ARGS \
+        || return 2
+    touch $PIDFILE
 }
 
-stop() {
-    echo -n $"Stopping $NAME: "
-    killproc -p ${pidfile} -d $STOP_TIMEOUT $mailcatcher
-    RETVAL=$?
-    echo
-    [ $RETVAL = 0 ] && rm -f ${pidfile}
+#
+# Function that stops the daemon/service
+#
+do_stop()
+{
+    PID=`/bin/ps -fu $USER| grep $NAME | grep -v "grep" | awk '{print $2}'`
+    if [ -f "$PIDFILE" ]
+    then
+        kill $PID
+        rm -f $PIDFILE
+        return 0
+    else
+        return 1
+    fi
+}
+
+#
+# Function that returns the status of the daemon/service
+#
+do_status()
+{
+    if [ -f "$PIDFILE" ]
+    then
+        echo "$NAME is running"
+    else
+        echo "$NAME is not running"
+    fi
+    return 0
 }
 
 case "$1" in
-    start)
-        start
-        ;;
-    stop)
-        stop
-        ;;
-    status)
-          status -p ${pidfile} $mailcatcher
-          RETVAL=$?
-          ;;
-    restart)
-          stop
-          start
-          ;;
-    *)
-        echo $"Usage: $0 $NAME {start|stop|restart|status}"
-        RETVAL=2
+  start)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    do_start
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
+  stop)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
+  status)
+    do_status
+    ;;
+  *)
+    echo "Usage: $SCRIPTNAME {start|stop|status}" >&2
+    exit 3
+    ;;
 esac
 
-exit $RETVAL
+:
