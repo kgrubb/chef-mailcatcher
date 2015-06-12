@@ -78,14 +78,14 @@ This cookbook contains the following attributes:
 Usage
 ---
 
-### mailcatcher::default
+### chef-mailcatcher::default
 
-Include `mailcatcher` in your node's `run_list`:
+Include `chef-mailcatcher` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[mailcatcher::default]"
+    "recipe[chef-mailcatcher::default]"
   ]
 }
 ```
@@ -107,4 +107,4 @@ WARNING: For now, the systemd scripts are incomplete, so any distro using system
 License and Authors
 ---
 
-Author: SPINEN (<keli.grubb@spinen.com>)
+Author: SPINEN (<keligrubb324@gmail.com>)
