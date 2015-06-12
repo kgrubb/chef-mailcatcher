@@ -4,7 +4,7 @@ maintainer_email 'keli.grubb@spinen.com'
 license          'Apache License v2.0'
 description      'Installs/Configures mailcatcher'
 long_description 'Installs/Configures mailcatcher'
-version          '0.1.6'
+version          '0.1.7'
 
 recipe "chef-mailcatcher", "Installs a single configurable instance of mailcatcher and installs/configures postfix."
 
