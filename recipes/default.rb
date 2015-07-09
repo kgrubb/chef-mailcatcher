@@ -20,7 +20,6 @@ when 'debian', 'ubuntu'
     package deb
   end
 when 'rhel', 'fedora', 'suse'
-  # Install required dependencies
   %w(
     gcc
     gcc-c++

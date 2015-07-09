@@ -26,12 +26,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = 'chef/suse'
+  config.vm.box = 'chef/ubuntu-14.04'
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # is not a Vagrant Cloud box and if it doesn't already exist on the
   # user's system.
-  config.vm.box_url = 'https://vagrantcloud.com/chef/suse'
+  config.vm.box_url = 'https://atlas.hashicorp.com/chef/boxes/ubuntu-14.04'
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -39,10 +39,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # network interface) by any external networks.
   config.vm.network :private_network, ip: '192.168.3.45', auto_config: false
 
-  # Enabling the Berkshelf plugin. To enable this globally, add this configuration
-  # option to your ~/.vagrant.d/Vagrantfile file
+  # Enabling the Berkshelf plugin. To enable this globally, add this
+  # configuration option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
-
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [

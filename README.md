@@ -29,7 +29,7 @@ This cookbook contains the following attributes:
     <td><tt>['mailcatcher']['mailcatcher']['bin']</tt></td>
     <td>String</td>
     <td>The location of the MailCatcher binary file</td>
-    <td><tt>/usr/bin/mailcatcher</tt></td>
+    <td><tt>/usr/local/bin/mailcatcher</tt></td>
   </tr>
   <tr>
     <td><tt>['mailcatcher']['smtp_ip']</tt></td>
