@@ -1,6 +1,7 @@
 language: ruby
 cache: bundler
 sudo: false
+gemfile: Gemfile
 rvm:
   - 1.9.3
   - 2.0.0
@@ -8,3 +9,6 @@ rvm:
 
 install:
   - bundle install
+
+script:
+  - bundle exec rake test:syntax test:lint test:spec
