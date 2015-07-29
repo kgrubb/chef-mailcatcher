@@ -20,6 +20,12 @@ This cookbook contains the following attributes:
     <th>Default</th>
   </tr>
   <tr>
+    <td><tt>['mailcatcher']['version']</tt></td>
+    <td>String</td>
+    <td>Version of the mailcatcher gem to install</td>
+    <td><tt>nil (defaults to latest version available)</tt></td>
+  </tr>
+  <tr>
     <td><tt>['mailcatcher']['mailcatcher']['name']</tt></td>
     <td>String</td>
     <td>The name of the MailCatcher binary file</td>
