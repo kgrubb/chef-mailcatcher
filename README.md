@@ -12,74 +12,18 @@ Attributes
 
 This cookbook contains the following attributes:
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['version']</tt></td>
-    <td>String</td>
-    <td>Version of the mailcatcher gem to install</td>
-    <td><tt>nil (defaults to latest version available)</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['mailcatcher']['name']</tt></td>
-    <td>String</td>
-    <td>The name of the MailCatcher binary file</td>
-    <td><tt>mailcatcher</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['mailcatcher']['bin']</tt></td>
-    <td>String</td>
-    <td>The location of the MailCatcher binary file</td>
-    <td><tt>/usr/bin/mailcatcher</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['smtp_ip']</tt></td>
-    <td>String</td>
-    <td>The ip address of the smtp server</td>
-    <td><tt>127.0.0.1</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['smtp_port']</tt></td>
-    <td>Integer</td>
-    <td>The port of the smtp server</td>
-    <td><tt>1025</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['http_ip']</tt></td>
-    <td>String</td>
-    <td>The ip address of the http server</td>
-    <td><tt>0.0.0.0</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['http_port']</tt></td>
-    <td>Integer</td>
-    <td>The port of the http server</td>
-    <td><tt>1080</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['mailcatcher']['logfile']</tt></td>
-    <td>string</td>
-    <td>The location of the log file</td>
-    <td><tt>/var/log/mailcatcher.log</tt></td>
-  </tr>
-    <tr>
-    <td><tt>['postfix']['hostname']</tt></td>
-    <td>string</td>
-    <td>The default hostname</td>
-    <td><tt>localhost-vagrant</tt></td>
-  </tr>
-    <tr>
-    <td><tt>['postfix']['relayhost']</tt></td>
-    <td>string</td>
-    <td>The relay host address</td>
-    <td><tt>127.0.0.1:1025</tt></td>
-  </tr>
-</table>
+|Key|Type|Description|Default|
+|:---|:---|:---|:---|
+|['mailcatcher']['version']|String|The version of the MailCatcher gem to install|nil (defaults to latest version available)|
+|['mailcatcher']['mailcatcher']['name']|String|The name of the MailCatcher binary file|mailcatcher|
+|['mailcatcher']['mailcatcher']['bin']|String|The location of the MailCatcher binary file|/usr/local/bin/mailcatcher|
+|['mailcatcher']['smtp_ip']|String|The ip address of the smtp server|127.0.0.1|
+|['mailcatcher']['smtp_port']|Integer|The port of the smtp server|1025|
+|['mailcatcher']['http_ip']|String|The ip address of the http server|0.0.0.0|
+|['mailcatcher']['http_port']|Integer|The port of the http server|1080|
+|['mailcatcher']['logfile']|String|The location of the log file|/var/log/mailcatcher.log|
+|['postfix']['hostname']|String|The default hostname|localhost-vagrant|
+|['postfix']['relayhost']|String|The relay host address|127.0.0.1:1025|
 
 Usage
 ---
