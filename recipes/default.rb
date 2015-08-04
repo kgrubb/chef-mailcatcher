@@ -32,7 +32,9 @@ when 'rhel', 'fedora', 'suse'
 end
 
 # Install mailcatcher
-gem_package 'mailcatcher'
+gem_package 'mailcatcher' do
+  version node['mailcatcher']['version'] if node['mailcatcher']['version']
+end
 
 # Create init scripts for Mailcatcher daemon.
 case node['platform']
