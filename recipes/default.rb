@@ -88,4 +88,4 @@ when 'fedora'
   end
 end
 
-include_recipe 'chef-mailcatcher::postfix'
+include_recipe 'chef-mailcatcher::postfix' if node['mailcatcher']['use_postfix']
