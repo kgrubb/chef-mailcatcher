@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: mailcatcher
+# Cookbook Name:: chef-mailcatcher
 # Recipe:: default
 #
 # Copyright (C) 2015 SPINEN
@@ -88,18 +88,4 @@ when 'fedora'
   end
 end
 
-# Install, configure, and restart postfix
-package 'postfix'
-
-service 'postfix' do
-  supports restart: true, start: true, stop: true, status: true
-  action :nothing
-end
-
-template '/etc/postfix/main.cf' do
-  source 'postfix.main.cf.erb'
-  owner 'root'
-  group 'root'
-  mode 0777
-  notifies :restart, 'service[postfix]', :immediately
-end
+include_recipe 'chef-mailcatcher::postfix' if node['mailcatcher']['use_postfix']

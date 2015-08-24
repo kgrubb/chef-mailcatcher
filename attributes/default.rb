@@ -15,5 +15,7 @@ default['mailcatcher']['name'] = 'mailcatcher'
 default['mailcatcher']['bin'] = "/usr/local/bin/#{node['mailcatcher']['name']}"
 default['mailcatcher']['logfile'] = '/var/log/mailcatcher.log'
 
+default['mailcatcher']['use_postfix'] = true
+
 default['postfix']['hostname'] = 'localhost-vagrant'
 default['postfix']['relayhost'] = '127.0.0.1:1025'
