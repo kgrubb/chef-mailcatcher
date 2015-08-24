@@ -45,10 +45,11 @@ Tested on:
 * Ubuntu 14.04
 * Debian 7.8
 * Centos 7.0
+* Fedora 21
 
 Let me know if any other platforms are compatible and I'll add them to the list.
 
-**WARNING**: For now, the systemd scripts are incomplete, so any distro using systemd will probably run into issues (ex. Fedora 21).
+**WARNING**: For now, the systemd scripts are only lightly tested. If you are using a distro that is using systemd (ex. Fedora 21 or Ubuntu 15), use with caution, and please inform me if anything isn't working properly.
 
 ## License and Authors
 

@@ -63,7 +63,7 @@ when 'debian'
     action :start
   end
 # sysv script for centos and suse (needs to be tested on suse still)
-when 'suse', 'centos'
+when 'centos'
   template '/etc/init.d/mailcatcher' do
     source 'mailcatcher.init.redhat.conf.erb'
     mode 0744
@@ -75,8 +75,8 @@ when 'suse', 'centos'
     action :start
   end
 # Systemd init scripts. Still broken.
-when 'fedora'
-  template '/usr/lib/systemd/system/mailcatcher.service' do
+when 'suse', 'fedora'
+  template '/etc/systemd/system/mailcatcher.service' do
     source 'mailcatcher.init.systemd.conf.erb'
     mode 0644
     notifies :restart, 'service[mailcatcher]', :immediately
