@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: mailcatcher
+# Cookbook Name:: chef-mailcatcher
 # Recipe:: default
 #
 # Copyright (C) 2015 SPINEN
@@ -31,7 +31,9 @@ when 'rhel', 'fedora', 'suse'
 end
 
 # Install mailcatcher
-gem_package 'mailcatcher'
+gem_package 'mailcatcher' do
+  version node['mailcatcher']['version'] if node['mailcatcher']['version']
+end
 
 # Create init scripts for Mailcatcher daemon.
 case node['platform']
@@ -60,7 +62,7 @@ when 'debian'
     action :start
   end
 # sysv script for centos and suse (needs to be tested on suse still)
-when 'suse', 'centos'
+when 'centos'
   template '/etc/init.d/mailcatcher' do
     source 'mailcatcher.init.redhat.conf.erb'
     mode 0744
@@ -72,8 +74,8 @@ when 'suse', 'centos'
     action :start
   end
 # Systemd init scripts. Still broken.
-when 'fedora'
-  template '/usr/lib/systemd/system/mailcatcher.service' do
+when 'suse', 'fedora'
+  template '/etc/systemd/system/mailcatcher.service' do
     source 'mailcatcher.init.systemd.conf.erb'
     mode 0644
     notifies :restart, 'service[mailcatcher]', :immediately
@@ -85,18 +87,4 @@ when 'fedora'
   end
 end
 
-# Install, configure, and restart postfix
-package 'postfix'
-
-service 'postfix' do
-  supports restart: true, start: true, stop: true, status: true
-  action :nothing
-end
-
-template '/etc/postfix/main.cf' do
-  source 'postfix.main.cf.erb'
-  owner 'root'
-  group 'root'
-  mode 0777
-  notifies :restart, 'service[postfix]', :immediately
-end
+include_recipe 'chef-mailcatcher::postfix' if node['mailcatcher']['use_postfix']

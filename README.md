@@ -1,14 +1,11 @@
-Chef Mailcatcher Cookbook
-===
+# Chef Mailcatcher Cookbook
 
-Description
----
+## Description
 
 This cookbook is an amalgamation of the mailcatcher cookbooks made by andruby and bryantebeek.
 It installs a single configurable instance of mailcatcher and installs/configures postfix.
 
-Attributes
----
+## Attributes
 
 This cookbook contains the following attributes:
 
@@ -24,8 +21,7 @@ This cookbook contains the following attributes:
 |['postfix']['hostname']|String|The default hostname|localhost-vagrant|
 |['postfix']['relayhost']|String|The relay host address|127.0.0.1:1025|
 
-Usage
----
+## Usage
 
 ### chef-mailcatcher::default
 
@@ -39,21 +35,34 @@ Include `chef-mailcatcher` in your node's `run_list`:
 }
 ```
 
-Supported Platforms
----
+## Supported Platforms
 
-Tested Platforms:
+Tested on:
 
 * Ubuntu 12.04
 * Ubuntu 14.04
 * Debian 7.8
 * Centos 7.0
+* Fedora 21
 
 Let me know if any other platforms are compatible and I'll add them to the list.
 
-WARNING: For now, the systemd scripts are incomplete, so any distro using systemd will probably run into issues (ex. Fedora 21).
+**WARNING**: For now, the systemd scripts are only lightly tested. If you are using a distro that is using systemd (ex. Fedora 21 or Ubuntu 15), use with caution, and please inform me if anything isn't working properly.
 
-License and Authors
----
+## License and Authors
 
 Author: SPINEN (<keligrubb324@gmail.com>)
+
+```text
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
