@@ -8,18 +8,20 @@ It installs a single configurable instance of mailcatcher and installs/configure
 ## Attributes
 
 This cookbook contains the following attributes:
-
-|Key|Type|Description|Default|
-|:---|:---|:---|:---|
-|['mailcatcher']['mailcatcher']['name']|String|The name of the MailCatcher binary file|mailcatcher|
-|['mailcatcher']['mailcatcher']['bin']|String|The location of the MailCatcher binary file|/usr/local/bin/mailcatcher|
-|['mailcatcher']['smtp_ip']|String|The ip address of the smtp server|127.0.0.1|
-|['mailcatcher']['smtp_port']|Integer|The port of the smtp server|1025|
-|['mailcatcher']['http_ip']|String|The ip address of the http server|0.0.0.0|
-|['mailcatcher']['http_port']|Integer|The port of the http server|1080|
-|['mailcatcher']['logfile']|String|The location of the log file|/var/log/mailcatcher.log|
-|['postfix']['hostname']|String|The default hostname|localhost-vagrant|
-|['postfix']['relayhost']|String|The relay host address|127.0.0.1:1025|
+=======
+| Key | Type | Description | Default |
+|:----|:-----|:------------|:--------|
+| ['mailcatcher']['version'] | String | The version of the MailCatcher gem to install | nil (defaults to latest version available) |
+| ['mailcatcher']['mailcatcher']['name'] | String | The name of the MailCatcher binary file | mailcatcher |
+| ['mailcatcher']['mailcatcher']['bin'] | String | The location of the MailCatcher binary file | /usr/local/bin/mailcatcher |
+| ['mailcatcher']['smtp_ip'] | String | The ip address of the smtp server | 127.0.0.1 |
+| ['mailcatcher']['smtp_port'] | Integer | The port of the smtp server | 1025 |
+| ['mailcatcher']['http_ip'] | String | The ip address of the http server | 0.0.0.0 |
+| ['mailcatcher']['http_port'] | Integer | The port of the http server | 1080 |
+| ['mailcatcher']['logfile'] | String | The location of the log file | /var/log/mailcatcher.log |
+| ['mailcatcher']['use_postfix'] | Boolean | Install postfix as mail relay | true |
+| ['postfix']['hostname'] | String | The default hostname | localhost-vagrant |
+| ['postfix']['relayhost'] | String | The relay host address | 127.0.0.1:1025 |
 
 ## Usage
 
