@@ -8,7 +8,7 @@ It installs a single configurable instance of mailcatcher and installs/configure
 ## Attributes
 
 This cookbook contains the following attributes:
-=======
+
 | Key | Type | Description | Default |
 |:----|:-----|:------------|:--------|
 | ['mailcatcher']['version'] | String | The version of the MailCatcher gem to install | nil (defaults to latest version available) |
