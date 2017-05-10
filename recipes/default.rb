@@ -10,36 +10,50 @@ case node['platform_family']
 when 'debian', 'ubuntu'
   %w(
     build-essential
-    software-properties-common
-    sqlite
     libsqlite3-dev
-    make
-    ruby1.9.1-dev
-    g++
+    ruby
+    ruby-dev  
   ).each do |deb|
     package deb
   end
-when 'rhel', 'fedora', 'suse'
+when 'rhel', 'fedora'
   # Install required dependencies
   %w(
     gcc
     gcc-c++
     sqlite-devel
+    ruby
+    rubygems
+    ruby-devel
+  ).each do |yum|
+    package yum
+  end
+when 'suse'
+  # Install required dependencies
+  %w(
+    gcc
+    gcc-c++
+    make
+    sqlite3-devel
+    ruby
     ruby-devel
   ).each do |yum|
     package yum
   end
 end
 
-# Install mailcatcher
-gem_package 'mailcatcher' do
-  version node['mailcatcher']['version'] if node['mailcatcher']['version']
-end
 
-# Create init scripts for Mailcatcher daemon.
-case node['platform']
-# upstart script for ubuntu machines
-when 'ubuntu'
+if node['platform'] == 'ubuntu' and node['platform_version'].to_f < 15.04
+# Install mailcatcher ruby 1.9
+  gem_package 'mime-types' do
+    version '< 3'
+  end
+  gem_package 'mailcatcher' do
+    version node['mailcatcher']['version'] if node['mailcatcher']['version']
+    options '--conservative'
+    ignore_failure true
+  end
+# upstart init script for ubuntu
   template '/etc/init/mailcatcher.conf' do
     source 'mailcatcher.upstart.conf.erb'
     mode 0644
@@ -48,10 +62,19 @@ when 'ubuntu'
   service 'mailcatcher' do
     provider Chef::Provider::Service::Upstart
     supports restart: true
-    action :start
+    action [ :enable, :start ]
   end
-# sysv script for debian
-when 'debian'
+elsif node['platform'] == 'debian' and node['platform_version'].to_f < 8.0 
+# Install mailcatcher ruby 1.9
+  gem_package 'mime-types' do
+    version '< 3'
+  end
+  gem_package 'mailcatcher' do
+    version node['mailcatcher']['version'] if node['mailcatcher']['version']
+    options '--conservative'
+    ignore_failure true
+  end
+# sysv init script for debian
   template '/etc/init.d/mailcatcher' do
     source 'mailcatcher.init.debian.conf.erb'
     mode 0744
@@ -60,10 +83,22 @@ when 'debian'
   service 'mailcatcher' do
     provider Chef::Provider::Service::Init
     supports start: true, stop: true, status: true
-    action :start
+    action [ :enable, :start ]
   end
-# sysv script for centos and suse (needs to be tested on suse still)
-when 'centos'
+elsif (node['platform'] == 'rhel' and node['platform_version'].to_f < 7.0) or
+      (node['platform'] == 'centos' and node['platform_version'].to_f < 7.14) or
+      (node['platform'] == 'fedora' and node['platform_version'].to_f < 15.0) or
+      (node['platform'] == 'suse' and node['platform_version'].to_f < 12.2) 
+# Install mailcatcher ruby 1.9
+  gem_package 'mime-types' do
+    version '< 3'
+  end
+  gem_package 'mailcatcher' do
+    version node['mailcatcher']['version'] if node['mailcatcher']['version']
+    options '--conservative'
+    ignore_failure true
+  end
+# sysv init script for rh based 
   template '/etc/init.d/mailcatcher' do
     source 'mailcatcher.init.redhat.conf.erb'
     mode 0744
@@ -72,10 +107,15 @@ when 'centos'
   service 'mailcatcher' do
     provider Chef::Provider::Service::Init
     supports start: true, stop: true, status: true
-    action :start
+    action [ :enable, :start ]
   end
-# Systemd init scripts. Still broken.
-when 'suse', 'fedora'
+else 
+# Install mailcatcher ruby > 2.0
+  gem_package 'mailcatcher' do
+    version node['mailcatcher']['version'] if node['mailcatcher']['version']
+    package_name node['mailcatcher']['name']
+  end
+# Systemd init scripts.
   template '/etc/systemd/system/mailcatcher.service' do
     source 'mailcatcher.init.systemd.conf.erb'
     mode 0644
@@ -84,7 +124,7 @@ when 'suse', 'fedora'
   service 'mailcatcher' do
     provider Chef::Provider::Service::Systemd
     supports restart: true
-    action :start
+    action [ :enable, :start ]
   end
 end
 

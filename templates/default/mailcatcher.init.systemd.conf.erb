@@ -3,7 +3,7 @@ Description=Mailcatcher webmail
 Documentation=http://mailcatcher.me/
 
 [Service]
-ExecStart=<%= node['mailcatcher']['bin'] %> --foreground --http-ip "<%= node['mailcatcher']['http_ip'] %>" --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip "<%= node['mailcatcher']['smtp_ip'] %>" --smtp-port <%= node['mailcatcher']['smtp_port'] %>
+ExecStart=<% if node['platform_family']=='suse' -%><%= node['mailcatcher']['susebin'] %><% else -%><%= node['mailcatcher']['bin'] %><% end -%> --foreground --http-ip "<%= node['mailcatcher']['http_ip'] %>" --http-port <%= node['mailcatcher']['http_port'] %> --smtp-ip "<%= node['mailcatcher']['smtp_ip'] %>" --smtp-port <%= node['mailcatcher']['smtp_port'] %>
 Type=simple
 
 [Install]
