@@ -1,3 +1,8 @@
+# 0.2
+
+Init systems choosing behavior changed, now better catches different platforms and init systems
+Fixes in tests. Suse-Leap, Debian 8 and Ubuntu 16 added to kitchen tests, Fedora support temporary removed due to lack of time.
+
 # 0.1.5
 
 Readme changes.

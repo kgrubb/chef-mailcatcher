@@ -41,11 +41,11 @@ Include `chef-mailcatcher` in your node's `run_list`:
 
 Tested on:
 
-* Ubuntu 12.04
 * Ubuntu 14.04
-* Debian 7.8
-* Centos 7.0
-* Fedora 21
+* Ubuntu 16.04
+* Debian 8.7
+* Centos 7.3
+* Suse Leap 42.2
 
 Let me know if any other platforms are compatible and I'll add them to the list.
 
