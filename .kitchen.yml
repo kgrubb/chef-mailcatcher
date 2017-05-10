@@ -6,9 +6,18 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
+#  - name: ubuntu-12.04 # Unsupported from April 2017 https://www.ubuntu.com/info/release-end-of-life
+  - name: ubuntu-16.04
   - name: ubuntu-14.04
-  - name: centos-7.0
+  - name: centos-7.3
+#  - name: centos-6.9 # End of Production 2 phase May 10, 2017 https://access.redhat.com/support/policy/updates/errata
+  #- name: debian-7.11 # supported to 31st May 2018 https://wiki.debian.org/LTS
+  #  driver:
+  #    kitchen_cache_directory: ~/.kitchen/cache/debian # Set due to https://github.com/test-kitchen/kitchen-vagrant/issues/293
+  - name: debian-8.7
+#  - name: fedora-25 # TODO fix gem build for fedora 
+  - name: opensuse-leap-42.2
+
 
 suites:
   - name: default
