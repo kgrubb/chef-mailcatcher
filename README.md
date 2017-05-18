@@ -53,7 +53,7 @@ Let me know if any other platforms are compatible and I'll add them to the list.
 
 ## License and Authors
 
-Author: SPINEN (<keligrubb324@gmail.com>)
+Author: Keli Grubb (<keligrubb324@gmail.com>)
 
 ```text
 Licensed under the Apache License, Version 2.0 (the "License");

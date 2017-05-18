@@ -1,6 +1,6 @@
 name             'chef-mailcatcher'
-maintainer       'SPINEN'
-maintainer_email 'keli.grubb@spinen.com'
+maintainer       'Keli Grubb'
+maintainer_email 'keligrubb324@gmail.com'
 license          'Apache License v2.0'
 description      'Installs/Configures mailcatcher'
 long_description 'Installs/Configures mailcatcher'
