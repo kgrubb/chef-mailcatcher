@@ -4,12 +4,15 @@ maintainer_email 'keli.grubb@spinen.com'
 license          'Apache License v2.0'
 description      'Installs/Configures mailcatcher'
 long_description 'Installs/Configures mailcatcher'
-version          '0.1.12'
+version          '0.2.0'
+issues_url       'https://github.com/kgrubb/chef-mailcatcher/issues' if respond_to?(:issues_url)
+source_url       'https://github.com/kgrubb/chef-mailcatcher' if respond_to?(:source_url)
+chef_version     '>= 12.0' if respond_to?(:chef_version)
 
 recipe 'chef-mailcatcher', 'Installs a single configurable instance of mailcatcher and installs/configures postfix.'
 
-supports 'ubuntu', '=12.04'
-supports 'ubuntu', '=14.04'
-supports 'centos', '=7.0'
-supports 'debian', '=7.8'
-supports 'fedora'
+supports 'rhel'
+supports 'centos'
+supports 'suse'
+supports 'ubuntu'
+supports 'debian'
